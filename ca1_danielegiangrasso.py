@@ -66,7 +66,7 @@ class test_dataDownload(unittest.TestCase):
    
     def testModule(self):
         data = getdata()
-        print("\n\nthe number of data downloaded is:" , len(data))
+        #print("\n\nthe number of data downloaded is:" , len(data))
         result = (len(data) % 4)
         self.assertEqual(0, result)
 
