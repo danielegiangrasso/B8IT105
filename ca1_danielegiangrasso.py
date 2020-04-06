@@ -52,15 +52,30 @@ def getdata():
                     dataset.append(value)
             except:
                 print("An exception occurred")
-        
-    
-    
+             
     return dataset
 
+
+def save_csv(dataset):
+
+    csv_file = open('ca_daniele_giangrasso.csv', 'w')
+    csv_file.write("Country,Confirmed Cases,Number of deaths, Death rate(%)\n")
+    index = 0
+    while index < len(dataset):
+        csv_file.write('"{0}","{1}","{2}","{3}"\n'.format(
+               dataset[index], dataset[index + 1], dataset[index + 2], dataset[index + 3]))
+        index += 4
+        
+def main():
+   dataset = getdata()   
+   save_csv(dataset)
+   
+main()
 
 #Because the table has 4 column I expect that every time
 #I run the alghoritm and I divide the len of the data by 4
 # it gives me 0 as result
+
 
 class test_dataDownload(unittest.TestCase):
    
@@ -69,8 +84,7 @@ class test_dataDownload(unittest.TestCase):
         #print("\n\nthe number of data downloaded is:" , len(data))
         result = (len(data) % 4)
         self.assertEqual(0, result)
-
-            
+              
 
 if __name__ == '__main__':
     unittest.main()
