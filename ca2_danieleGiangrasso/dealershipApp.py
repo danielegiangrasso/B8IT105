@@ -42,8 +42,11 @@ def main():
     car_no_rented = still_available(dealership)
     details = open_csv(car_no_rented)
     save_csv(details)
-    print("HI, please entere in the .csv to che check out that value are"+
-          "updated with new cars avaibles for renting")
+    print("Hi there, please enter in the .csv file (carPark)\n"+
+          "to check out that the values of column (Rented)\n" +
+          "updated accroding with the choices you made\n" +
+          "thanks")
+          
         
 if __name__ == '__main__':
     main()
