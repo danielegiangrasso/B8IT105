@@ -3,7 +3,7 @@
 #install.packages("tidyverse")
 #install.packages("funModeling")
 #install.packages("Hmisc", dependencies = TRUE)
-options(warn=-1)
+
 suppressMessages(library(funModeling))
 suppressMessages(library(tidyverse))
 suppressMessages(library(Hmisc))
@@ -48,6 +48,7 @@ print(names(df.new))
 
 
 df.cor = df.new
+options(warn=-1)
 df.cor$gender = dummy(df$gender)
 df.cor$ssc_b = dummy(df$ssc_b)
 df.cor$hsc_b = dummy(df$hsc_b)
@@ -56,11 +57,12 @@ df.cor$degree_t = dummy(df$degree_t)
 df.cor$workex = dummy(df$workex)
 df.cor$specialisation = dummy(df$specialisation)
 df.cor$status = dummy(df$status)
+options(warn=0)
 print(names(df.cor))
 
 
 df.cor.plot <- cor(df.cor)
-corrplot(df.cor.plot,method = c("square") , type = "lower", graphType="heatmap")
+corrplot(df.cor.plot,method = c("square") , type = "lower")
 
 df.new$gender = factor(df$gender)
 df.new$ssc_b = factor(df$ssc_b)
@@ -103,7 +105,7 @@ test <- df[170:215,]
 modelTrain <- glm(status ~. ,family=binomial(link='logit'),data=train)
 fitted.results <- predict(modelTrain,newdata = test, type='response')
 fitted.results <- ifelse(fitted.results > 0.5,1,0)
-misClasificError <- mean(fitted.results != df$status)
+misClasificError <- mean(fitted.results != test$status)
 print(paste('Accuracy',1-misClasificError))
 
 p <- predict(modelTrain,newdata = test, type='response')
